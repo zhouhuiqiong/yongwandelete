@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/highlight.js/9.8.0/styles/github-gist.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.8.0/languages/go.min.js"></script>
+    <script src="demo_topad.js" type="text/javascript"></script>    <script type="text/javascript" src="clipboard.min.js"></script>
+    
+<body>
+    <!---->
+    <div class="topic-content-wrap">
+       <!--  <code>upload.qiniu.com</code> -->
+        <div class="topic-detail">
+
+            <pre><code>{
+            &quot;tasks&quot;: [
+                {
+                    &quot;name&quot;: &quot;default&quot;,
+                    &quot;src&quot;: &quot;&lt;SyncDir&gt;&quot;,
+                    &quot;dest&quot;: &quot;qiniu:access_key=&lt;AccessKey&gt;&amp;secret_key=&lt;SecretKey&gt;&amp;bucket=&lt;Bucket&gt;&amp;key_prefix=&lt;KeyPrefix&gt;&quot;,
+                    &quot;deletable&quot;: 0,
+                    &quot;ignore_dir_structure&quot;: 0
+                }
+            ],
+            &quot;debug_level&quot;: 0
+        }
+            </code></pre>
+            <pre><code>./qrsboxcli
+            Usage:
+              qrsboxcli init &lt;AccessKey&gt; &lt;SecretKey&gt; &lt;SyncDir&gt; &lt;Bucket&gt;  - Init qrsbox conf
+              qrsboxcli sync &amp;                                           - Watch &lt;SyncDir&gt; and sync files
+              qrsboxcli log                                              - View sync log
+              qrsboxcli stop                                             - Kill qrsboxcli sync process
+
+            BuildVersion:
+              qrsboxcli v2.5.20131013
+            </code></pre>
+            <pre><code>Access-Control-Allow-Origin: *</code></pre>
+
+            <pre><code>//国内https上传
+    BOOL isHttps = TRUE;
+    QNZone * httpsZone = [[QNAutoZone alloc] initWithHttps:isHttps dns:nil];
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.zone = httpsZone;
+    }];
+
+//华东
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.zone = [QNZone zone0];
+    }];
+
+//华北
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.zone = [QNZone zone1];
+    }];
+
+//华南
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.zone = [QNZone zone2];
+    }];
+
+//北美
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.zone = [QNZone zoneNa0];
+    }];
+
+//海外https上传
+    NSArray * upIps = [NSArray arrayWithObject:@&quot;115.231.97.46&quot;];
+    QNServiceAddress * up = [[QNServiceAddress alloc] init:@&quot;https://upload.qbox.me&quot; ips:upIps];
+    QNZone *zone0 = [[QNFixedZone alloc] initWithUp:up upBackup:nil];
+    QNConfiguration * config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.zone = zone0;
+    }];
+
+//重用uploadManager。一般地，只需要创建一个uploadManager对象
+    NSString * token = @&quot;从服务端SDK获取&quot;;
+    NSString * key = @&quot;指定七牛服务上的文件名，或nil&quot;;
+    NSString * filePath = @&quot;要上传的文件路径&quot;;
+    QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];
+    params:nil
+    checkCrc:NO
+    cancellationSignal:nil];
+    [upManager putFile:filePath key:key token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+        if(info.ok)
+        {
+            NSLog(@&quot;请求成功&quot;);
+        }
+        else{
+            NSLog(@&quot;失败&quot;);
+            //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
+        }
+        NSLog(@&quot;info ===== %@&quot;, info);
+        NSLog(@&quot;resp ===== %@&quot;, resp);
+    }
+    option:nil];
+</code></pre>
+
+        </div>
+    </div>
+    <!---->
+
+
+
+
+
+</body>
+</head>
+<script >
+    $(function(){
+        // $('pre code').each(function(){
+        //     texts = $(this).text().replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
+        //     .replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&quot;')        
+        //     var codetext = texts.split('\n');
+        //     var code = '';
+        //     $(codetext).each(function(v){
+        //         code += '<li>'+codetext[v]+'</li>';
+        //     })        
+        //     code = '<ol>'+code+'</ol>';
+        //     $(this).html(code);
+        // });
+
+        $('code').each(function(){
+            $(this).html("<ol><li>" + $(this).html().replace(/\n/g,'\n</li><li>') + "</li></ol>");
+            $(this).parent('pre').before('<div class="tools hidden-xs"><button title="" class="btn copybtn" data-toggle="tooltip" data-placement="top" container="body" data-original-title="拷贝代码" data-clipboard-text="">拷贝</button></div>');
+                $('[data-toggle="tooltip"]').tooltip();
+
+            $(this).parent('pre').prev('.tools').find('.copybtn').attr('data-clipboard-text',$(this).text());
+        });
+        hljs.initHighlightingOnLoad();
+        //复制
+        var clipboard = new Clipboard('.copybtn');
+        clipboard.on('success', function(e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        });
+
+    function html_encode(strHTML)   //使用此函数编码你的文章
+        {   
+          var strTem = "";   
+          if (strHTML.length == 0) return "";   
+          strTem = strHTML.replace(/&/g, "&gt;");   
+          strTem = strTem.replace(/</g, "&lt;");   
+          strTem = strTem.replace(/>/g, "&gt;");   
+          strTem = strTem.replace(/ /g, "&nbsp;");   
+          strTem = strTem.replace(/\'/g, "&#39;");   
+          strTem = strTem.replace(/\"/g, "&quot;");   
+          strTem = strTem.replace(/\n/g, "");   
+          return strTem;   
+        }
+//编码后在把内容赋值给相应的显示控件即可
+//使用下面这句测试一下显示的内容：
+    console.log(html_encode("<p>1231231</p>"));
+            });
+</script>  
+<style type="text/css">
+    pre {
+        padding: 0;
+        background-color: #fff;
+        font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+        overflow: auto;
+        
+    }
+    code{
+        padding: 0.5em;
+        padding-right: 45px;
+    }
+    .tools{
+        position: relative;
+        /*word-break: break-all;
+        word-wrap: break-word;*/
+
+    }
+    .tooltip-inner{
+        min-width: 80px;
+
+    }
+    .code-box{
+
+    }
+    .topic-content-wrap .topic-detail pre ol li {
+        list-style: decimal-leading-zero;
+        list-style-position: outside !important;
+        border-left: 3px solid #6CE26C;
+        padding: 0 3px 0 10px !important;
+        margin: 0 !important;
+        line-height: 150%;
+    }
+    .copybtn {
+    position: absolute;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #767676;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #e1e1e8;
+    border-radius: 0 4px 0 4px;
+    right: -2px;
+    top: -1px;
+    z-index: 0;
+}
+</style>
