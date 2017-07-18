@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="commonemail_Wrap">
+        <div>
+            <div><label>收件人</label><input type="text" name="website" id="test1" /></div>
+            <div><label>主题</label><input type="text"  id="test2" name="subject"/></div>
+            <div><label class="unique">内容</label><textarea  rows="4"   id="test3" name="message"></textarea></div>
+            <!--<input type="button" name="send" value="发送邮件" id="SendEmail"/>-->
+            <a href="" id="SendEmail">发送邮件</a>
+        </div>
+    </div>
+    <a href="mailto:zhq_189@163.com;zhq_189@163.com?CC=zhq_189@163.com&BCC=test@163.com&Subject=Hello&Body=你好">给我发邮件</a>
+</body>
+</html>
+<script type="text/javascript">
+        $(document).on("click", "#SendEmail", function () {
+
+            //var website = document.getElementById("test1").value;
+            var website = 'zhq_189@163.com';
+
+            var subject = document.getElementById("test2").value;
+            var body = document.getElementById("test3").value;
+            var url = "mailto:" + website + "?subject=" + subject + "&body=" + body;
+            document.getElementById("SendEmai").setAttribute("href", url);
+     　　　　//return fasle;
+        });
+</script>

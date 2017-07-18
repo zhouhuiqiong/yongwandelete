@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="a.css" rel="stylesheet">
+<body>
+    <div class="container">
+      <div class="row">
+        <ul class="col-md-10 box clearfix">
+            <li class="col-md-1-5 col-xs-3"></li>
+            <li class="col-md-1-5 col-xs-3"></li>
+            <li class="col-md-1-5 col-xs-3"></li>
+            <li class="col-md-1-5 col-xs-3"></li>
+            <li class="col-md-1-5 col-xs-3"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="spinner-primary">
+    <svg viewBox="0 0 64 64"><g><circle cx="16" cy="32" stroke-width="0" r="5.60108"><animate attributeName="fill-opacity" dur="750ms" values=".5;.6;.8;1;.8;.6;.5;.5" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="3;3;4;5;6;5;4;3" repeatCount="indefinite"></animate></circle><circle cx="32" cy="32" stroke-width="0" r="4.60108"><animate attributeName="fill-opacity" dur="750ms" values=".5;.5;.6;.8;1;.8;.6;.5" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="4;3;3;4;5;6;5;4" repeatCount="indefinite"></animate></circle><circle cx="48" cy="32" stroke-width="0" r="3.60108"><animate attributeName="fill-opacity" dur="750ms" values=".6;.5;.5;.6;.8;1;.8;.6" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="5;4;3;3;4;5;6;5" repeatCount="indefinite"></animate></circle></g></svg>
+    </div>
+</body>
+</html>
+
+<style type="text/css">
+.spinner-primary {
+    stroke: #1989fa;
+    fill: #1989fa;
+}
+ svg {
+    width: 42px;
+    height: 42px;
+    display: block;
+    margin: 0 auto;
+}
+  li{
+    list-style: none;
+  }
+  .box{
+    border-top: 1px dashed #000;
+    border-bottom: 1px dashed #000;
+    padding: 0px 40px;
+    margin-top: 100px;
+  }
+  .box li{
+    height: 150px;
+    position: relative;
+
+  }
+  .box li:after{
+    content: '';
+    height: 200px;
+    border-left: 1px dashed #000;
+    position: absolute;
+    top: 50%;
+    margin-top: -100px;
+    left: 0px;
+  }
+    .box li:last-of-type:before{
+      content: '';
+      height: 200px;
+      border-left: 1px dashed #f00;
+      position: absolute;
+      top: 50%;
+      margin-top: -100px;
+      right: 0px;
+  }
+
+  .col-md-1-5 {
+
+width: 20%;
+
+float: left;
+
+}
+
+.col-xs-1-5,.col-sm-1-5,.col-md-1-5,.col-lg-1-5 {
+
+min-height: 1px;
+
+padding-left: 15px;
+
+padding-right: 15px;
+
+position: relative;
+
+}
+
+@media (min-width: 768px) {
+
+.col-sm-1-5 {
+
+width: 20%;
+
+float: left;
+
+}
+
+}
+
+@media (min-width: 992px) {
+
+.col-md-1-5 {
+
+width: 20%;
+
+float: left;
+
+}
+
+}
+
+@media (min-width: 1200px) {
+
+.col-lg-1-5 {
+
+width: 20%;
+
+float: left;
+
+}
+
+}
+</style>

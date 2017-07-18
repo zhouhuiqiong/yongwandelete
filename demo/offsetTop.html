@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<style type="text/css">
+    .box{
+        width: 1000px;
+        height: 500px;
+        background: #ccc;
+        overflow-y: auto;
+    }
+    .childBox{
+        height: 1000px;
+        width: 100px;
+        background: #f00;
+        margin-top: 1000px;
+    }
+</style>
+<body>
+    <div class="box">
+        <div class="childBox">
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+//getelementbyclassname
+    var box = document.getElementsByClassName('box')[0],
+        childBox = document.getElementsByClassName('childBox')[0];
+    box.addEventListener('scroll', function(){
+        console.log(childBox.offsetTop);
+        console.log($(childBox).offset().top);
+    });
+</script>
